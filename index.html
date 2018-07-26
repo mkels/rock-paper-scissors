@@ -5,6 +5,8 @@
 </head>
 <body>
 	<script>
+		let result;
+
 		//Generate the computer selection
 		function computerPlay() {
 			let x = Math.floor((Math.random() * 3) + 1); 
@@ -21,22 +23,53 @@
 		function playRound(playerSelection, computerSelection) {
 			playerSelection = prompt("Rock, Paper, Scissors?");
 			computerSelection = computerPlay();
-			
+
 			playerSelection = playerSelection.toLowerCase();
 			if(playerSelection == "rock" && computerSelection == "scissors") {
-				return "You win! Rock beats scissors";
+				result = "You won! Rock beats scissors";
 			} else if(playerSelection == "rock" && computerSelection == "paper") {
-				return "You lose! Paper beats rock";
+				result = "You lost! Paper beats rock";
 			} else if(playerSelection == "paper" && computerSelection == "scissors") {
-				return "You lose! Scissors beats paper";
+				retsult = "You lost! Scissors beats paper";
 			} else if(playerSelection == "paper" && computerSelection == "rock") {
-				return "You win! Paper beats rock";
+				result = "You won! Paper beats rock";
 			} else if(playerSelection == "scissors" && computerSelection == "paper") {
-				return "You win! Scissors beats paper";
+				result = "You won! Scissors beats paper";
 			} else if(playerSelection == "scissors" && computerSelection == "rock") {
-				return "You lose! Rock beats scissors";
+				result = "You lost! Rock beats scissors";
+			} else if(playerSelection == computerSelection) {
+				result = "Tie! Try again";
 			} else {
-				return "Tie! Try again";
+				result = "Invalid input. Try again";
+			}
+
+			return result;
+		}
+
+		//Play a full game of 5 rounds
+		function game() {
+			let playerScore = 0;
+			let computerScore = 0;
+
+			//Play until computer or player score reaches 5
+			while (playerScore < 5 && computerScore < 5) {
+				playRound();
+				if (result.search("won") >= 0) {
+					playerScore++;
+				} else if (result.search("lost") >= 0) {
+					computerScore++;
+				}
+				console.clear();
+				console.log(result);
+				console.log("Computer: " + computerScore);
+				console.log("Player: " + playerScore);
+			}
+
+			//Return winner
+			if(playerScore == 5) {
+				return "Congratulations! You won the game!";
+			} else {
+				return "You lose! Better luck next time";
 			}
 		}
 	</script>
