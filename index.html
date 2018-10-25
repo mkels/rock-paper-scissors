@@ -4,9 +4,9 @@
 	<title>Rock Paper Scissors</title>
 </head>
 <body>
-	<button>Rock</button>
-	<button>Paper</button>
-	<button>Scissors</button>
+	<button id="rock">Rock</button>
+	<button id="paper">Paper</button>
+	<button id="scissors">Scissors</button>
 	<script>
 		let result;
 
@@ -24,10 +24,10 @@
 
 		//Play one round of Rock, Paper, Scissors
 		function playRound(playerSelection, computerSelection) {
-			playerSelection = prompt("Rock, Paper, Scissors?");
-			computerSelection = computerPlay();
+			//playerSelection = prompt("Rock, Paper, Scissors?");
+			//computerSelection = computerPlay();
 
-			playerSelection = playerSelection.toLowerCase();
+			//playerSelection = playerSelection.toLowerCase();
 			if(playerSelection == "rock" && computerSelection == "scissors") {
 				result = "You won! Rock beats scissors";
 			} else if(playerSelection == "rock" && computerSelection == "paper") {
@@ -46,35 +46,21 @@
 				result = "Invalid input. Try again";
 			}
 
-			return result;
+			alert(result);
 		}
 
-		//Play a full game of 5 rounds
-		function game() {
-			let playerScore = 0;
-			let computerScore = 0;
+		var btn = document.querySelectorAll('button');
+		btn.forEach( (button) => {
+			button.addEventListener('click', (e) => {
+				playerSelection = button.id;
+				computerSelection = computerPlay();
+				console.log(playerSelection);
+				console.log(computerSelection);
+				playRound(playerSelection, computerSelection);
+			});
+		});
 
-			//Play until computer or player score reaches 5
-			while (playerScore < 5 && computerScore < 5) {
-				playRound();
-				if (result.search("won") >= 0) {
-					playerScore++;
-				} else if (result.search("lost") >= 0) {
-					computerScore++;
-				}
-				console.clear();
-				console.log(result);
-				console.log("Computer: " + computerScore);
-				console.log("Player: " + playerScore);
-			}
 
-			//Return winner
-			if(playerScore == 5) {
-				return "Congratulations! You won the game!";
-			} else {
-				return "You lose! Better luck next time";
-			}
-		}
 	</script>
 </body>
 </html>
