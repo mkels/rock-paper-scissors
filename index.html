@@ -7,8 +7,15 @@
 	<button id="rock">Rock</button>
 	<button id="paper">Paper</button>
 	<button id="scissors">Scissors</button>
+	<div>
+	</div>
 	<script>
 		let result;
+		
+		//Add results section
+		const p = document.createElement('p');
+		const div = document.querySelector('div');
+		div.appendChild(p);
 
 		//Generate the computer selection
 		function computerPlay() {
@@ -33,7 +40,7 @@
 			} else if(playerSelection == "rock" && computerSelection == "paper") {
 				result = "You lost! Paper beats rock";
 			} else if(playerSelection == "paper" && computerSelection == "scissors") {
-				retsult = "You lost! Scissors beats paper";
+				result = "You lost! Scissors beats paper";
 			} else if(playerSelection == "paper" && computerSelection == "rock") {
 				result = "You won! Paper beats rock";
 			} else if(playerSelection == "scissors" && computerSelection == "paper") {
@@ -45,8 +52,6 @@
 			} else {
 				result = "Invalid input. Try again";
 			}
-
-			alert(result);
 		}
 
 		var btn = document.querySelectorAll('button');
@@ -57,10 +62,11 @@
 				console.log(playerSelection);
 				console.log(computerSelection);
 				playRound(playerSelection, computerSelection);
+
+				//Display result
+				p.textContent = result;
 			});
 		});
-
-
 	</script>
 </body>
 </html>
