@@ -7,6 +7,7 @@
 	<button id="rock">Rock</button>
 	<button id="paper">Paper</button>
 	<button id="scissors">Scissors</button>
+	<button id="reset">Reset</button>
 	<div id="rd"></div>
 	<div id="sc"></div>
 	<script>
@@ -16,13 +17,18 @@
 		
 		//Add results section
 		const round = document.createElement('p');
+		round.textContent = "Choose Rock, Paper or Scissors to begin a game!"
 		const rd = document.querySelector('#rd');
 		rd.appendChild(round);
 
-		//Add score section
-		const score = document.createElement('p');
+		//Add score sections
+		const cscore = document.createElement('p');
+		cscore.textContent = "Computer: " + computerScore;
+		const pscore = document.createElement('p');
+		pscore.textContent = "You: " + playerScore;
 		const sc = document.querySelector('#sc');
-		sc.appendChild(score);
+		sc.appendChild(pscore);
+		sc.insertBefore(cscore, pscore);
 
 		//Generate the computer selection
 		function computerPlay() {
@@ -66,6 +72,10 @@
 				} else if (result.search("lost") >= 0) {
 					computerScore++;
 				}
+			} else if (playerScore == 5) {
+				result = "You win! Game over.";
+			} else {
+				result = "Computer wins! Game over.";
 			}
 		}
 
@@ -81,7 +91,8 @@
 
 				//Display result
 				round.textContent = result;
-				score.textContent = playerScore + " " + computerScore;
+				pscore.textContent = "You: " + playerScore;
+				cscore.textContent = "Computer: " + computerScore;
 			});
 		});
 	</script>
