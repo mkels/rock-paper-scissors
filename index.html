@@ -7,15 +7,22 @@
 	<button id="rock">Rock</button>
 	<button id="paper">Paper</button>
 	<button id="scissors">Scissors</button>
-	<div>
-	</div>
+	<div id="rd"></div>
+	<div id="sc"></div>
 	<script>
 		let result;
+		let playerScore = 0;
+		let computerScore = 0;
 		
 		//Add results section
-		const p = document.createElement('p');
-		const div = document.querySelector('div');
-		div.appendChild(p);
+		const round = document.createElement('p');
+		const rd = document.querySelector('#rd');
+		rd.appendChild(round);
+
+		//Add score section
+		const score = document.createElement('p');
+		const sc = document.querySelector('#sc');
+		sc.appendChild(score);
 
 		//Generate the computer selection
 		function computerPlay() {
@@ -31,10 +38,7 @@
 
 		//Play one round of Rock, Paper, Scissors
 		function playRound(playerSelection, computerSelection) {
-			//playerSelection = prompt("Rock, Paper, Scissors?");
-			//computerSelection = computerPlay();
-
-			//playerSelection = playerSelection.toLowerCase();
+			//Compare inputs and play one round
 			if(playerSelection == "rock" && computerSelection == "scissors") {
 				result = "You won! Rock beats scissors";
 			} else if(playerSelection == "rock" && computerSelection == "paper") {
@@ -54,6 +58,17 @@
 			}
 		}
 
+		//Play a full game of 5 rounds
+		function game() {
+			if (playerScore < 5 && computerScore < 5) {
+				if (result.search("won") >= 0) {
+					playerScore++;
+				} else if (result.search("lost") >= 0) {
+					computerScore++;
+				}
+			}
+		}
+
 		var btn = document.querySelectorAll('button');
 		btn.forEach( (button) => {
 			button.addEventListener('click', (e) => {
@@ -62,9 +77,11 @@
 				console.log(playerSelection);
 				console.log(computerSelection);
 				playRound(playerSelection, computerSelection);
+				game();
 
 				//Display result
-				p.textContent = result;
+				round.textContent = result;
+				score.textContent = playerScore + " " + computerScore;
 			});
 		});
 	</script>
