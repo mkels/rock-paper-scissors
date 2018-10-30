@@ -5,12 +5,19 @@
 	<link rel="stylesheet" type="text/css" href="style.css">
 </head>
 <body>
-	<button id="rock">Rock</button>
-	<button id="paper">Paper</button>
-	<button id="scissors">Scissors</button>
-	<button id="reset">Reset</button>
-	<div id="rd"></div>
-	<div id="sc"></div>
+	<div class="flexButtons">
+		<button id="rock">Rock</button>
+		<button id="paper">Paper</button>
+		<button id="scissors">Scissors</button>
+		<button id="reset">Reset</button>
+	</div>
+	<div class="flexText">
+		<div id="rd"></div>
+	</div>
+	<div class="flexText">
+		<div id="psc"></div>
+		<div id="csc"></div>
+	</div>
 	<script>
 		let result;
 		let playerScore = 0;
@@ -27,9 +34,10 @@
 		cscore.textContent = "Computer: " + computerScore;
 		const pscore = document.createElement('p');
 		pscore.textContent = "You: " + playerScore;
-		const sc = document.querySelector('#sc');
-		sc.appendChild(pscore);
-		sc.insertBefore(cscore, pscore);
+		const psc = document.querySelector('#psc');
+		psc.appendChild(pscore);
+		const csc = document.querySelector('#csc');
+		csc.appendChild(cscore);
 
 		//Generate the computer selection
 		function computerPlay() {
@@ -73,9 +81,11 @@
 				} else if (result.search("lost") >= 0) {
 					computerScore++;
 				}
-			} else if (playerScore == 5) {
+			}
+
+			if (playerScore == 5) {
 				result = "You win! Game over.";
-			} else {
+			} else if (computerScore == 5) {
 				result = "Computer wins! Game over.";
 			}
 		}
