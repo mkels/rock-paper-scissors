@@ -29,11 +29,17 @@
 		const rd = document.querySelector('#rd');
 		rd.appendChild(round);
 
-		//Add score sections
+		//Create computer score section
 		const cscore = document.createElement('p');
 		cscore.textContent = "Computer: " + computerScore;
+		cscore.classList.add('loss');
+		
+		//Create player score section
 		const pscore = document.createElement('p');
 		pscore.textContent = "You: " + playerScore;
+		pscore.classList.add('loss');
+		
+		//Add computer and player score sections to the DOM
 		const psc = document.querySelector('#psc');
 		psc.appendChild(pscore);
 		const csc = document.querySelector('#csc');
@@ -68,6 +74,8 @@
 				result = "You lost! Rock beats scissors";
 			} else if(playerSelection == computerSelection) {
 				result = "Tie! Try again";
+				pscore.classList.remove('win');
+				cscore.classList.remove('win');
 			} else {
 				result = "Invalid input. Try again";
 			}
@@ -78,15 +86,23 @@
 			if (playerScore < 5 && computerScore < 5) {
 				if (result.search("won") >= 0) {
 					playerScore++;
+					pscore.classList.remove('loss');
+					cscore.classList.remove('win');
+					pscore.classList.add('win');
 				} else if (result.search("lost") >= 0) {
 					computerScore++;
+					cscore.classList.remove('loss');
+					pscore.classList.remove('win');
+					cscore.classList.add('win');
 				}
 			}
 
 			if (playerScore == 5) {
 				result = "You win! Game over.";
+				round.classList.add('gameover');	
 			} else if (computerScore == 5) {
 				result = "Computer wins! Game over.";
+				round.classList.add('gameover');
 			}
 		}
 
@@ -106,6 +122,7 @@
 				cscore.textContent = "Computer: " + computerScore;
 			});
 		});
+
 	</script>
 </body>
 </html>

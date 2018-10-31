@@ -33,6 +33,19 @@ button:hover {
 	align-content: center;
 }
 
+.loss {
+	transform: scale(1.0);
+}
+
+.win {
+	transform: scale(1.2);
+}
+
+.gameover {
+	transform: scale(2.0);
+	text-shadow: 2px 2px #8A95A5;
+}
+
 p {
 	font-family: lucida console;
 	color: #8E5572;
