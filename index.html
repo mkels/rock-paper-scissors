@@ -112,6 +112,8 @@
 			round.textContent = "Choose Rock, Paper or Scissors to begin a game!"
 			pscore.textContent = "You: " + playerScore;
 			cscore.textContent = "Computer: " + computerScore;
+			pscore.classList.remove('win');
+			cscore.classList.remove('win');
 		}
 
 		var btn = document.querySelectorAll('button');
