@@ -105,10 +105,22 @@
 				round.classList.add('gameover');
 			}
 		}
+		
+		function reset() {
+			playerScore = 0;
+			computerScore = 0;
+			round.textContent = "Choose Rock, Paper or Scissors to begin a game!"
+			pscore.textContent = "You: " + playerScore;
+			cscore.textContent = "Computer: " + computerScore;
+		}
 
 		var btn = document.querySelectorAll('button');
 		btn.forEach( (button) => {
 			button.addEventListener('click', (e) => {
+				if( button.id == "reset" ) {
+					reset(); 
+					return;
+				}
 				playerSelection = button.id;
 				computerSelection = computerPlay();
 				console.log(playerSelection);
@@ -122,7 +134,6 @@
 				cscore.textContent = "Computer: " + computerScore;
 			});
 		});
-
 	</script>
 </body>
 </html>
